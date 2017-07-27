@@ -1,5 +1,6 @@
 package com.arvin.takeout;
 
+import android.animation.ArgbEvaluator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -42,24 +43,46 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = View.inflate(getContext(), R.layout.fragment_home, null);
         ButterKnife.inject(this, mView);
-        mHomeRvAdapter = new HomeRvAdapter(getContext(),mDatas);
+        mHomeRvAdapter = new HomeRvAdapter(getContext(), mDatas);
         //1.设置适配器
         mRvHome.setAdapter(mHomeRvAdapter);
         //设置布局样式
-        mRvHome.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        mRvHome.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         return mView;
     }
 
+    int sumY;//当前滚动的距离
+    float distance = 400.00f;  //滚动到150.00颜色最深，alpha值最大,临界值
+    int startbgColor = 0x553190E8;
+    int endbgColor = 0Xff438bfd;
+    int bgcolor = 0;//背景色变量
+    ArgbEvaluator mArgbEvaluator = new ArgbEvaluator();
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // 2 加载数据
         LoadData();
+        mRvHome.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                //需要知道y方向滚动多少，累加得到总共滚动多少；
+                sumY += dy;
+                if (sumY<0){//没有滚动
+                    bgcolor=startbgColor;
+                }else if (sumY>distance){//超出渐变范围
+                    bgcolor=endbgColor;
+                }else {
+                    bgcolor= (int) mArgbEvaluator.evaluate(distance/sumY,startbgColor,endbgColor);
+                }
+                mLlTitleContainer.setBackgroundColor(bgcolor);
+            }
+        });
     }
 
     private void LoadData() {
-        for (int i = 0; i <100 ; i++) {
-            mDatas.add("我是是----"+i);
+        for (int i = 0; i < 100; i++) {
+            mDatas.add("我是是----" + i);
             mHomeRvAdapter.setDatas(mDatas);
         }
     }
