@@ -55,12 +55,6 @@ public class HomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         // 2 加载数据
         LoadData();
-//        mRvHome.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//            }
-//        });
     }
 
     private void LoadData() {
