@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,8 +75,7 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
                 itemView = View.inflate(mContext, R.layout.item_division, null);
                 return new DivisionHolder(itemView);
             case TYPE_SELLER:
-                itemView = View.inflate(mContext, R.layout.item_home_common, null);
-//                itemView = View.inflate(mContext, R.layout.item_seller, null);
+                itemView = View.inflate(mContext, R.layout.item_seller, null);
                 return new SellerHolder(itemView);
             default:
                 Toast.makeText(mContext, "竟然有第四种holder", Toast.LENGTH_SHORT).show();
@@ -139,8 +139,18 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
     }
 
     class SellerHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.tv)
-        TextView mTv;
+        @InjectView(R.id.tvCount)
+        TextView mTvCount;
+        @InjectView(R.id.tv_title)
+        TextView mTvTitle;
+        @InjectView(R.id.ratingBar)
+        RatingBar mRatingBar;
+        @InjectView(R.id.tv_home_sale)
+        TextView mTvHomeSale;
+        @InjectView(R.id.tv_home_send_price)
+        TextView mTvHomeSendPrice;
+        @InjectView(R.id.tv_home_distance)
+        TextView mTvHomeDistance;
 
         SellerHolder(View view) {
             super(view);
@@ -148,7 +158,7 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(String data) {
-            mTv.setText(data);
+
         }
     }
 
