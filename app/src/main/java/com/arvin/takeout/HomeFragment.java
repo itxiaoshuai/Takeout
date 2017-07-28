@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.arvin.takeout.adapter.HomeRvAdapter;
+import com.arvin.takeout.adapter.Seller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,9 +53,9 @@ public class HomeFragment extends Fragment {
     }
 
     int sumY;//当前滚动的距离
-    float distance = 400.00f;  //滚动到150.00颜色最深，alpha值最大,临界值
+    float distance = 200.00f;  //滚动到150.00颜色最深，alpha值最大,临界值
     int startbgColor = 0x553190E8;
-    int endbgColor = 0Xff438bfd;
+    int endbgColor = 0xff3190E8;
     int bgcolor = 0;//背景色变量
     ArgbEvaluator mArgbEvaluator = new ArgbEvaluator();
     @Override
@@ -73,18 +74,23 @@ public class HomeFragment extends Fragment {
                 }else if (sumY>distance){//超出渐变范围
                     bgcolor=endbgColor;
                 }else {
-                    bgcolor= (int) mArgbEvaluator.evaluate(distance/sumY,startbgColor,endbgColor);
+                    bgcolor= (int) mArgbEvaluator.evaluate(sumY/distance,startbgColor,endbgColor);
                 }
                 mLlTitleContainer.setBackgroundColor(bgcolor);
             }
         });
     }
-
+    private List<String> mNearbySellers = new ArrayList<>();
+    private List<String> mOtherSellers = new ArrayList<>();
     private void LoadData() {
-        for (int i = 0; i < 100; i++) {
-            mDatas.add("我是是----" + i);
-            mHomeRvAdapter.setDatas(mDatas);
+        for (int i = 0; i < 10; i++) {
+            mNearbySellers.add("我是附近商家：" + i);
+            mHomeRvAdapter.setDatas(mDatas, mNearbySellers);
         }
+        for (int i = 0; i < 31; i++) {
+            mOtherSellers.add("我是普通商家：" + i);
+        }
+        mHomeRvAdapter.setDatas(mNearbySellers,mOtherSellers);
     }
 
     @Override
