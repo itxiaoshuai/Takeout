@@ -1,4 +1,4 @@
-package com.arvin.takeout;
+package com.arvin.takeout.ui.fragment;
 
 import android.animation.ArgbEvaluator;
 import android.os.Bundle;
@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.arvin.takeout.adapter.HomeRvAdapter;
-import com.arvin.takeout.adapter.Seller;
+import com.arvin.takeout.R;
+import com.arvin.takeout.ui.adapter.HomeRvAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

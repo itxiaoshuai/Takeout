@@ -1,4 +1,4 @@
-package com.arvin.takeout;
+package com.arvin.takeout.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

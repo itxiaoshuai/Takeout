@@ -1,4 +1,4 @@
-package com.arvin.takeout.adapter;
+package com.arvin.takeout.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

@@ -1,4 +1,4 @@
-package com.arvin.takeout;
+package com.arvin.takeout.ui.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+
+import com.arvin.takeout.ui.fragment.HomeFragment;
+import com.arvin.takeout.ui.fragment.MoreFragment;
+import com.arvin.takeout.ui.fragment.OrderFragment;
+import com.arvin.takeout.R;
+import com.arvin.takeout.ui.fragment.UserFragment;
 
 import java.util.ArrayList;
 import java.util.List;
