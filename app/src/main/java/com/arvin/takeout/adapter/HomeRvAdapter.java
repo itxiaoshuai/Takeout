@@ -71,8 +71,7 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
                 itemView = View.inflate(mContext, R.layout.item_title, null);
                 return new TitleHolder(itemView);
             case TYPE_DIVISION:
-                itemView = View.inflate(mContext, R.layout.item_home_common, null);
-//                itemView = View.inflate(mContext, R.layout.item_division, null);
+                itemView = View.inflate(mContext, R.layout.item_division, null);
                 return new DivisionHolder(itemView);
             case TYPE_SELLER:
                 itemView = View.inflate(mContext, R.layout.item_home_common, null);
@@ -94,7 +93,7 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
                 break;
             case TYPE_DIVISION:
                 DivisionHolder divisionHolder = (DivisionHolder) holder;
-                divisionHolder.setData("------我是华丽的分割线-----");
+                divisionHolder.setData("");
                 break;
             case TYPE_SELLER:
                 SellerHolder sellerHolder = (SellerHolder) holder;
@@ -184,8 +183,8 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
     }
 
     class DivisionHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.tv)
-        TextView mTv;
+        @InjectView(R.id.tv_division_title)
+        TextView mTvDivisionTitle;
 
         DivisionHolder(View view) {
             super(view);
@@ -193,7 +192,8 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(String data) {
-            mTv.setText(data);
+            mTvDivisionTitle.setText(data);
         }
     }
+
 }
