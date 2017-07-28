@@ -195,5 +195,4 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
             mTvDivisionTitle.setText(data);
         }
     }
-
 }
