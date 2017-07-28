@@ -2,6 +2,7 @@ package com.arvin.takeout.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arvin.takeout.R;
+import com.arvin.takeout.module.beans.Seller;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
@@ -25,8 +27,8 @@ import butterknife.InjectView;
 
 public class HomeRvAdapter extends RecyclerView.Adapter {
     private Context mContext;
-    private List<String> mOtherSellers;
-    private List<String> mNearbySellers;
+    private List<Seller> mOtherSellers;
+    private List<Seller> mNearbySellers;
 
 
     public static final int GROUP_SIZE = 10;
@@ -35,14 +37,14 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
     public static final int TYPE_SELLER = 2;
 
 
-    public HomeRvAdapter(Context context, List<String> nearbySellers) {
+    public HomeRvAdapter(Context context, List<Seller> nearbySellers) {
         mNearbySellers = nearbySellers;
         mContext = context;
 
 
     }
 
-    public void setDatas(List<String> nearbySellers, List<String> otherSellers) {
+    public void setDatas(List<Seller> nearbySellers, List<Seller> otherSellers) {
         mNearbySellers = nearbySellers;
         mOtherSellers = otherSellers;
         notifyDataSetChanged();
@@ -101,14 +103,14 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
                 int index;
                 if (position < mNearbySellers.size() + 1) {
                     index = position - 1;
-                    String nearbyData = mNearbySellers.get(index);
+                    Seller nearbyData = mNearbySellers.get(index);
                     sellerHolder.setData(nearbyData);
                 } else {
                     //减去头、附近、第一个分割线
                     index = position - 1 - mNearbySellers.size() - 1;
                     //减去如果达到第二个或者更后面的分割线
                     index -= index / (GROUP_SIZE + 1);
-                    String otherData = mOtherSellers.get(index);
+                    Seller otherData = mOtherSellers.get(index);
                     sellerHolder.setData(otherData);
                 }
                 break;
@@ -157,8 +159,8 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
             ButterKnife.inject(this, view);
         }
 
-        public void setData(String data) {
-
+        public void setData(Seller seller) {
+            mTvTitle.setText(seller.getName());
         }
     }
 
@@ -175,8 +177,11 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
             testData(mContext);
         }
 
+        HashMap<String, String> url_maps = new HashMap<String, String>();
+
         private void testData(Context context) {
-            HashMap<String, String> url_maps = new HashMap<String, String>();
+            //重复加载导致图片增多的问题
+            mSliderLayout.removeAllSliders();
             url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
             url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
             url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");

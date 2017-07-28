@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.arvin.takeout.R;
+import com.arvin.takeout.module.beans.Seller;
+import com.arvin.takeout.presenter.HomeFragmentPresenter;
 import com.arvin.takeout.ui.adapter.HomeRvAdapter;
 
 import java.util.ArrayList;
@@ -36,15 +39,16 @@ public class HomeFragment extends Fragment {
     @InjectView(R.id.ll_title_container)
     LinearLayout mLlTitleContainer;
     private View mView;
-    private List<String> mDatas = new ArrayList<>();
-    private HomeRvAdapter mHomeRvAdapter;
+    public HomeRvAdapter mHomeRvAdapter;
+    private HomeFragmentPresenter mHomeFragmentPresenter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = View.inflate(getContext(), R.layout.fragment_home, null);
         ButterKnife.inject(this, mView);
-        mHomeRvAdapter = new HomeRvAdapter(getContext(), mDatas);
+        mHomeFragmentPresenter = new HomeFragmentPresenter(this);
+        mHomeRvAdapter = new HomeRvAdapter(getContext(), mNearbySellers);
         //1.设置适配器
         mRvHome.setAdapter(mHomeRvAdapter);
         //设置布局样式
@@ -80,16 +84,17 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-    private List<String> mNearbySellers = new ArrayList<>();
-    private List<String> mOtherSellers = new ArrayList<>();
+    private List<Seller> mNearbySellers = new ArrayList<>();
+    private List<Seller> mOtherSellers = new ArrayList<>();
     private void LoadData() {
+
         for (int i = 0; i < 10; i++) {
-            mNearbySellers.add("我是附近商家：" + i);
-            mHomeRvAdapter.setDatas(mDatas, mNearbySellers);
+//            mNearbySellers.add("我是附近商家：" + i);
         }
         for (int i = 0; i < 31; i++) {
-            mOtherSellers.add("我是普通商家：" + i);
+//            mOtherSellers.add("我是普通商家：" + i);
         }
+        mHomeFragmentPresenter.getHomeData();
         mHomeRvAdapter.setDatas(mNearbySellers,mOtherSellers);
     }
 

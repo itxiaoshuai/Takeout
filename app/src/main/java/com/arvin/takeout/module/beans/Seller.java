@@ -1,4 +1,4 @@
-package com.arvin.takeout.adapter;
+package com.arvin.takeout.module.beans;
 
 import android.content.pm.ActivityInfo;
 
