@@ -1,9 +1,7 @@
 package com.arvin.takeout.presenter;
 
-import android.util.Log;
-
-import com.arvin.takeout.module.beans.Seller;
-import com.arvin.takeout.module.net.ResponseInfo;
+import com.arvin.takeout.model.beans.Seller;
+import com.arvin.takeout.model.net.ResponseInfo;
 import com.arvin.takeout.ui.fragment.HomeFragment;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

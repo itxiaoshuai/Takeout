@@ -3,8 +3,8 @@ package com.arvin.takeout.presenter;
 import android.widget.Toast;
 
 import com.arvin.takeout.TakeoutApp;
-import com.arvin.takeout.module.net.RequestApi;
-import com.arvin.takeout.module.net.ResponseInfo;
+import com.arvin.takeout.model.net.RequestApi;
+import com.arvin.takeout.model.net.ResponseInfo;
 import com.arvin.takeout.utils.Constants;
 
 import retrofit2.Call;

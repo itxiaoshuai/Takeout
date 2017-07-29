@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +13,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.arvin.takeout.R;
-import com.arvin.takeout.module.beans.Seller;
+import com.arvin.takeout.dagger2.component.DaggerHomeFragmentComponent;
+import com.arvin.takeout.dagger2.module.HomeFragmentModule;
+import com.arvin.takeout.model.beans.Seller;
 import com.arvin.takeout.presenter.HomeFragmentPresenter;
 import com.arvin.takeout.ui.adapter.HomeRvAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -40,14 +43,17 @@ public class HomeFragment extends Fragment {
     LinearLayout mLlTitleContainer;
     private View mView;
     public HomeRvAdapter mHomeRvAdapter;
-    private HomeFragmentPresenter mHomeFragmentPresenter;
+    @Inject
+    HomeFragmentPresenter mHomeFragmentPresenter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = View.inflate(getContext(), R.layout.fragment_home, null);
         ButterKnife.inject(this, mView);
-        mHomeFragmentPresenter = new HomeFragmentPresenter(this);
+//        mHomeFragmentPresenter = new HomeFragmentPresenter(this);
+        //使用dagger2解耦
+        DaggerHomeFragmentComponent.builder().homeFragmentModule(new HomeFragmentModule(this)).build().in(this);
         mHomeRvAdapter = new HomeRvAdapter(getContext(), mNearbySellers);
         //1.设置适配器
         mRvHome.setAdapter(mHomeRvAdapter);

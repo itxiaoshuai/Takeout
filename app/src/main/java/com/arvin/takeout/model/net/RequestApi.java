@@ -1,4 +1,4 @@
-package com.arvin.takeout.module.net;
+package com.arvin.takeout.model.net;
 
 import com.arvin.takeout.utils.Constants;
 

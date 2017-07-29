@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arvin.takeout.R;
-import com.arvin.takeout.module.beans.Seller;
+import com.arvin.takeout.model.beans.Seller;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
@@ -160,6 +160,14 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
 
         public void setData(Seller seller) {
             mTvTitle.setText(seller.getName());
+            mTvCount.setText(seller.getSale());
+            mTvTitle.setText(seller.getName());
+            if (!seller.getScore().isEmpty()){
+                mRatingBar.setRating(Float.parseFloat(seller.getScore()));
+            }
+            if (!seller.getDistance().isEmpty())
+            mTvHomeDistance.setText(seller.getDistance());
+            mTvHomeSendPrice.setText("￥"+seller.sendPrice +"起送/配送费￥" + seller.getDeliveryFee());
         }
     }
 

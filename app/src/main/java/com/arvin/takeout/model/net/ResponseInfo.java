@@ -1,4 +1,4 @@
-package com.arvin.takeout.module.net;
+package com.arvin.takeout.model.net;
 
 /**
  * Created by Arvin on 2017/7/28 19:15
