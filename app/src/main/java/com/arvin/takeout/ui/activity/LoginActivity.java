@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     @InjectView(R.id.login)
     TextView mLogin;
     private String mPhoneNum;
+    private int mTime;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,8 +89,8 @@ public class LoginActivity extends AppCompatActivity {
                 //点击获取验证码
                 SMSSDK.getVerificationCode("86", mPhoneNum);
                 //点击后禁用按钮，倒计时1分钟，如果还没收到短信，让用户可以重新点击
-//                mTvUserCode.setEnabled(false);
-//                new Thread(new Countdown()){}.start();
+                mTvUserCode.setEnabled(false);
+                new Thread(new Countdown()){}.start();
                 break;
             case R.id.login:
                 //点击提交验证码---》登入
@@ -103,19 +104,20 @@ public class LoginActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case CUT_DOWN:
-                    mTvUserCode.setText("剩余时间("+ time +")");
+                    mTvUserCode.setText("剩余时间("+ mTime +")");
                     break;
                 case RESEND:
                     mTvUserCode.setText("获取验证码");
+                    mTvUserCode.setEnabled(true);
                     break;
             }
         }
     };
-    int time =60;
     private class Countdown implements Runnable {
         @Override
         public void run() {
-            for(;time>0;time --){
+            mTime = 60;
+            for(; mTime >0; mTime--){
                 //发送消息更新UI
                 mHandler.sendEmptyMessage(CUT_DOWN);
                 SystemClock.sleep(999);
