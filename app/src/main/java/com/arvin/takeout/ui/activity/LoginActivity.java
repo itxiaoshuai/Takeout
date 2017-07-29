@@ -17,6 +17,9 @@ import com.arvin.takeout.dagger2.module.LoginActivityModule;
 import com.arvin.takeout.presenter.LoginActivityPresenter;
 import com.arvin.takeout.utils.Constants;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
@@ -71,10 +74,10 @@ public class LoginActivity extends AppCompatActivity {
                     //提交验证码成功
                     Log.e("sms", "提交验证码成功,可以登录了");
                     //TODO:登录自己的服务器（提交电话号码信息）
-//                    Map<String,String> params = new HashMap<>();
-//                    params.put("type", "2"); //类型1为传统登录，类型2位短信登陆，类型3为第三方登录
-//                    params.put("phoneNum",mPhoneNum);
-//                    mLoginActivityPresenter.login(params);
+                    Map<String,String> params = new HashMap<>();
+                    params.put("type", "2"); //类型1为传统登录，类型2位短信登陆，类型3为第三方登录
+                    params.put("phoneNum",mPhoneNum);
+                    mLoginActivityPresenter.login(params);
                 } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
                     //获取验证码成功
                     Log.e("sms", "获取验证码成功");
