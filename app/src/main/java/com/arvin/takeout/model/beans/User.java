@@ -1,20 +1,23 @@
 package com.arvin.takeout.model.beans;
 
-//@DatabaseTable(tableName = "t_user")
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "t_user")
 public class User {
 
 	//注意generatedId会让id自动增长，错误的，id由服务器决定
-//	@DatabaseField(id = true)
+	@DatabaseField(id = true)
 	private int id;
-//	@DatabaseField(columnName = "name")
+	@DatabaseField(columnName = "name")
 	private String name;
-//	@DatabaseField(columnName = "balance")
+	@DatabaseField(columnName = "balance")
 	private float balance;
-//	@DatabaseField(columnName = "discount")
+	@DatabaseField(columnName = "discount")
 	private int discount;
-//	@DatabaseField(columnName = "integral")
+	@DatabaseField(columnName = "integral")
 	private int integral;
-//	@DatabaseField(columnName = "phone")
+	@DatabaseField(columnName = "phone")
 	private String phone;
 
 	public int getId() {

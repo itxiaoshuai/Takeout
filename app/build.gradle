@@ -52,4 +52,6 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     //share 短信
     compile name: 'SMSSDK-2.1.1', ext: 'aar'
+    //ormlite 数据库
+    compile 'com.j256.ormlite:ormlite-android:5.0'
 }

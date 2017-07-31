@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arvin.takeout.R;
 import com.arvin.takeout.dagger2.component.DaggerLoginActivityComponent;
@@ -107,8 +108,13 @@ public class LoginActivity extends AppCompatActivity {
                 break;
             case R.id.login:
                 //点击提交验证码---》登入
-                String code = mEtUserCode.getText().toString().trim();
-                SMSSDK.submitVerificationCode("86", mPhoneNum, code);
+//                String code = mEtUserCode.getText().toString().trim();
+//                SMSSDK.submitVerificationCode("86", mPhoneNum, code);
+
+                Map<String,String> params = new HashMap<>();
+                params.put("type", "2"); //类型1为传统登录，类型2位短信登陆，类型3为第三方登录
+                params.put("phoneNum",mPhoneNum);
+                mLoginActivityPresenter.login(params);
                 break;
         }
     }
@@ -127,6 +133,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     };
+
+    public void changeUi(boolean isLoginOk) {
+        if(isLoginOk){
+            finish();
+        }else{
+            Toast.makeText(this,"请检查手机验证码是否正确",Toast.LENGTH_LONG).show();
+        }
+    }
 
     private class Countdown implements Runnable {
         @Override
