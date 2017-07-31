@@ -41,6 +41,7 @@ public class LoginActivityPresenter extends BasePresenter {
         Gson gson = new Gson();
         //将json数据转化成javabean
         User user = gson.fromJson(data, User.class);
+        Log.e("xxxxx",user.toString());
         if (user.getId() != -1) {
             //1.把登录信息存到本地（保存到内存中），（保存到sqlite中）
 
@@ -60,7 +61,9 @@ public class LoginActivityPresenter extends BasePresenter {
                 Dao<User, Integer> userDao = openHelper.getDao(User.class);
 //            userDao.create(user);
 //            userDao.update(user);
-                userDao.createIfNotExists(user);//
+                userDao.createIfNotExists(user);
+                Log.e("login", "成功存入用户id为" + user.getId());
+                androidDataBaseConnection.commit(startPoint);
             } catch (SQLException e) {
                 e.printStackTrace();
                 if (startPoint != null) {
@@ -72,10 +75,14 @@ public class LoginActivityPresenter extends BasePresenter {
                 }
                 //TODO:2.登录失败，切换UI
                 mLoginActivity.changeUi(false);
+                Log.e("xxxx","登录失败，切换UI");
             }
+            //TODO:2.登录成功，切换UI
+            mLoginActivity.changeUi(true);
         } else {
             //TODO:2.登录失败，切换UI
             mLoginActivity.changeUi(false);
+            Log.e("xxxx","登录失败，切换UI222222222");
         }
     }
 

@@ -18,23 +18,21 @@ import java.sql.SQLException;
 
 public class TakeoutOpenHelper extends OrmLiteSqliteOpenHelper {
     private static TakeoutOpenHelper sTakeoutOpenHelper;
-
-    public static TakeoutOpenHelper getInstance() {
-        if (sTakeoutOpenHelper == null) {
-            sTakeoutOpenHelper = new TakeoutOpenHelper(TakeoutApp.sInstance);
+    public static TakeoutOpenHelper getInstance(){
+        if (sTakeoutOpenHelper==null){
+            sTakeoutOpenHelper=new TakeoutOpenHelper(TakeoutApp.sInstance);
         }
         return sTakeoutOpenHelper;
     }
-
-    public TakeoutOpenHelper(Context context) {
-        super(context, "take", null, 1);
+    private TakeoutOpenHelper(Context context) {
+        super(context, "takeout", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         //根据javabean生成sqlite的数据表
         try {
-            TableUtils.clearTable(connectionSource, User.class);
+            TableUtils.createTable(connectionSource, User.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
