@@ -1,5 +1,6 @@
 package com.arvin.takeout.presenter;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.arvin.takeout.TakeoutApp;
@@ -33,6 +34,7 @@ public abstract class BasePresenter {
     }
 
     protected Callback<ResponseInfo> mInfoCallback = new Callback<ResponseInfo>() {
+
         @Override
         public void onResponse(Call<ResponseInfo> call, Response<ResponseInfo> response) {
             ResponseInfo responseInfo = response.body();

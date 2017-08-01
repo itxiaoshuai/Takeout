@@ -6,6 +6,7 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 /**
@@ -23,7 +24,7 @@ public interface RequestApi {
 
     @GET(Constants.ORDER)//订单
         //返回的数据
-    Call<ResponseInfo> getOrderList();
+    Call<ResponseInfo> getOrderList(@Query("userID")int userId);
 
     @GET(Constants.LOGIN)//登入
     Call<ResponseInfo> login(@QueryMap Map<String, String> params);

@@ -24,6 +24,8 @@ public class TakeoutApp extends Application {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
+        //初始化赋值user
         sUser = new User();
+        sUser.setId(-1);//未登录为-1
     }
 }

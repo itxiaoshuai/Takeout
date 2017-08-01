@@ -1,5 +1,7 @@
 package com.arvin.takeout.presenter;
 
+import android.util.Log;
+
 import com.arvin.takeout.model.beans.Seller;
 import com.arvin.takeout.model.net.ResponseInfo;
 import com.arvin.takeout.ui.fragment.HomeFragment;
