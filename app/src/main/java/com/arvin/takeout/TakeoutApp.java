@@ -5,6 +5,9 @@ import android.content.Context;
 
 import com.arvin.takeout.model.beans.User;
 
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.data.JPushLocalNotification;
+
 /**
  * Created by Arvin on 2017/7/28 19:50
  * E-Mail Address：it_xiaoshuai@163.com
@@ -27,5 +30,10 @@ public class TakeoutApp extends Application {
         //初始化赋值user
         sUser = new User();
         sUser.setId(-1);//未登录为-1
+        JPushInterface.setDebugMode(true);
+        //启动极光推送
+        JPushInterface.init(this);
+
+
     }
 }

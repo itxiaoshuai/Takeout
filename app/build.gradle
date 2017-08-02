@@ -47,11 +47,14 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.slider:library:1.1.5@aar'
     //retrofit
-    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.google.code.gson:gson:2.4'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     //share 短信
     compile name: 'SMSSDK-2.1.1', ext: 'aar'
     //ormlite 数据库
     compile 'com.j256.ormlite:ormlite-android:5.0'
+
+    compile files('libs/jcore-android-1.1.6.jar')
+    compile files('libs/jpush-android-3.0.8.jar')
 }
