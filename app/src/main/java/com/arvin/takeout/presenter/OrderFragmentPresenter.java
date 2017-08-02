@@ -27,6 +27,8 @@ public class OrderFragmentPresenter extends BasePresenter{
         List<Order> orderList=gson.fromJson(data,new TypeToken<List<Order>>(){}.getType());
         //把数据set到recycleview
         mOrderFragment.mOrderRvAdapter.setOrderList(orderList);
+        //数据加载完成停止刷新
+        mOrderFragment.mSrlOrder.setRefreshing(false);
     }
     public void getOrderList(int userId){
         Call<ResponseInfo> orderListCall=mRequest.getOrderList(userId);

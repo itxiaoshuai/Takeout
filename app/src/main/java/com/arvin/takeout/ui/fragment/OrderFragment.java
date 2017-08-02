@@ -34,18 +34,19 @@ import butterknife.InjectView;
  * Created by Arvin on 2017/7/27 16:26
  * E-Mail Address：it_xiaoshuai@163.com
  */
-public class OrderFragment extends Fragment {
+public class OrderFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     @InjectView(R.id.rv_order_list)
     RecyclerView mRvOrderList;
     @InjectView(R.id.srl_order)
-    SwipeRefreshLayout mSrlOrder;
+    public SwipeRefreshLayout mSrlOrder;
     private TextView mTextView;
     private View mView;
     private List<Order> mOrderList = new ArrayList<>();
     @Inject
     OrderFragmentPresenter mOrderFragmentPresenter;
     public OrderRvAdapter mOrderRvAdapter;
+    private User mUser;
 
     @Nullable
     @Override
@@ -63,9 +64,13 @@ public class OrderFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        User user = TakeoutApp.getUser();
-        if (user.getId() != -1) {
-            mOrderFragmentPresenter.getOrderList(user.getId());
+        mUser = TakeoutApp.getUser();
+        if (mUser.getId() != -1) {
+            //开始刷新加载数据
+            mSrlOrder.setRefreshing(true);
+            mOrderFragmentPresenter.getOrderList(mUser.getId());
+            //设置下拉刷新监听
+            mSrlOrder.setOnRefreshListener(this);
         }else {
             Toast.makeText(getContext(), "请先登入", Toast.LENGTH_SHORT).show();
         }
@@ -76,5 +81,10 @@ public class OrderFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+    }
+
+    @Override
+    public void onRefresh() {
+        mOrderFragmentPresenter.getOrderList(mUser.getId());
     }
 }
