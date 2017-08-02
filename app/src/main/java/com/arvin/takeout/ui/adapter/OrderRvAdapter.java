@@ -77,9 +77,9 @@ public class OrderRvAdapter extends RecyclerView.Adapter implements Observer {
             Order order = mOrderList.get(i);
             if (order.getId().equals(orderId)) {
                 order.setType(type);
-                Log.e("push", getOrderTypeInfo(type));
+                Log.e("jpush", getOrderTypeInfo(type));
                 index = i;
-                Log.e("push", "i:" + i);
+                Log.e("jpush", "i:" + i);
             }
         }
         if(index !=-1){
