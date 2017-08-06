@@ -1,9 +1,11 @@
 package com.arvin.takeout.model.beans;
 
+import java.io.Serializable;
+
 /**
  * 配送信息
  */
-public class Distribution {
+public class Distribution implements Serializable{
     // 配送方式
     private String type;
     // 配送说明

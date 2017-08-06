@@ -32,7 +32,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="22dp"
                 android:layout_toRightOf="@+id/iv_order_detail_back"
-                android:text="黑马……"
+                android:text="愤怒的小鸟"
                 android:textColor="#FFF"
                 android:textSize="18sp" />
 

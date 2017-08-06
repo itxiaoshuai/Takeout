@@ -1,6 +1,8 @@
 package com.arvin.takeout.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 
 import com.arvin.takeout.R;
 import com.arvin.takeout.model.beans.Order;
+import com.arvin.takeout.model.beans.OrderDetail;
+import com.arvin.takeout.ui.activity.OrderDetailActivity;
 import com.arvin.takeout.utils.OrderObservable;
 
 import java.util.HashMap;
@@ -124,7 +128,7 @@ public class OrderRvAdapter extends RecyclerView.Adapter implements Observer {
         return typeInfo;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @InjectView(R.id.iv_order_item_seller_logo)
         ImageView mIvOrderItemSellerLogo;
         @InjectView(R.id.tv_order_item_seller_name)
@@ -139,15 +143,27 @@ public class OrderRvAdapter extends RecyclerView.Adapter implements Observer {
         TextView mTvOrderItemMoney;
         @InjectView(R.id.tv_order_item_multi_function)
         TextView mTvOrderItemMultiFunction;
+        private Order mOrder;
 
         ViewHolder(View view) {
             super(view);
             ButterKnife.inject(this, view);
+            view.setOnClickListener(this);
         }
 
         public void setData(Order order) {
+            this.mOrder=order;
             mTvOrderItemSellerName.setText(order.getSeller().getName());
             mTvOrderItemType.setText(getOrderTypeInfo(order.getType()));
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(mContext, OrderDetailActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("order",mOrder);
+            intent.putExtras(bundle);
+            mContext.startActivity(intent);
         }
     }
 }

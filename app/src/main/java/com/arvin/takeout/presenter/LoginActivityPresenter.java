@@ -75,14 +75,12 @@ public class LoginActivityPresenter extends BasePresenter {
                 }
                 //TODO:2.登录失败，切换UI
                 mLoginActivity.changeUi(false);
-                Log.e("xxxx","登录失败，切换UI");
             }
             //TODO:2.登录成功，切换UI
             mLoginActivity.changeUi(true);
         } else {
             //TODO:2.登录失败，切换UI
             mLoginActivity.changeUi(false);
-            Log.e("xxxx","登录失败，切换UI222222222");
         }
     }
 

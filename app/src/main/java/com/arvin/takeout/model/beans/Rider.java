@@ -3,10 +3,12 @@ package com.arvin.takeout.model.beans;
 
 import android.location.Location;
 
+import java.io.Serializable;
+
 /**
  * 骑手
  */
-public class Rider {
+public class Rider implements Serializable {
     private int id;
     private String name;
     private String phone;
