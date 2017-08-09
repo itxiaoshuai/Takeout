@@ -42,7 +42,7 @@ public class GoodsFragment extends Fragment {
         ButterKnife.inject(this, view);
         //实例化presenter
         DaggerGoodsFragmentComponent.builder().goodsFragmentModule(new GoodsFragmentModule(this)).build().in(this);
-        mGoodsTypeAdapter = new GoodsTypeAdapter();
+        mGoodsTypeAdapter = new GoodsTypeAdapter(this,getContext());
         mRvGoodsType.setAdapter(mGoodsTypeAdapter);
         //设置布局样式
         mRvGoodsType.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));

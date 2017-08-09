@@ -23,7 +23,7 @@ public class GoodsFragmentPresenter extends BasePresenter {
     private List<GoodsTypeInfo> mGoodsTypeInfoList;
 
     public GoodsFragmentPresenter(GoodsFragment goodsFragment) {
-        mGoodsFragment = new GoodsFragment();
+        mGoodsFragment = goodsFragment;
     }
 
     /**
@@ -56,5 +56,6 @@ public class GoodsFragmentPresenter extends BasePresenter {
 //                mGoodsInfoList.add(goodsInfo);
 //            }
 //        }
+        mGoodsFragment.mGoodsTypeAdapter.setGoodsTypeInfoList(mGoodsTypeInfoList);
     }
 }

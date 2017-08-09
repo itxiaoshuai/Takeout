@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.arvin.takeout.R;
 import com.arvin.takeout.model.beans.GoodsTypeInfo;
+import com.arvin.takeout.ui.fragment.GoodsFragment;
 
 import java.util.List;
 
@@ -24,8 +25,14 @@ import butterknife.InjectView;
  * 用于展示商品类型的recycleview
  */
 public class GoodsTypeAdapter extends RecyclerView.Adapter {
+    private GoodsFragment mGoodsFragment;
     private Context mContext;//需要上下文
     private List<GoodsTypeInfo> mGoodsTypeInfoList;//需要数据
+
+    public GoodsTypeAdapter(GoodsFragment goodsFragment, Context context) {
+        mGoodsFragment = goodsFragment;
+        mContext = context;
+    }
 
     public void setGoodsTypeInfoList(List<GoodsTypeInfo> goodsTypeInfoList) {
         mGoodsTypeInfoList = goodsTypeInfoList;
@@ -36,22 +43,24 @@ public class GoodsTypeAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_type, parent, false);
-        ViewHolder viewHolder=new ViewHolder(itemView);//绑定视图
-        return viewHolder;
+        return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ViewHolder viewHolder= (ViewHolder) holder;
-        viewHolder.setData(mGoodsTypeInfoList.get(position),position);
+        ViewHolder viewHolder = (ViewHolder) holder;
+        viewHolder.setData(mGoodsTypeInfoList.get(position), position);
     }
 
     @Override
     public int getItemCount() {
+        if (mGoodsTypeInfoList != null) {
+            return mGoodsTypeInfoList.size();
+        }
         return 0;
     }
 
-     class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         @InjectView(R.id.tvCount)
         TextView mTvCount;
         @InjectView(R.id.type)
@@ -62,9 +71,9 @@ public class GoodsTypeAdapter extends RecyclerView.Adapter {
             ButterKnife.inject(this, view);
         }
 
-         public void setData(GoodsTypeInfo goodsTypeInfo, int position) {
-             mType.setText(goodsTypeInfo.getName());
-         }
-     }
+        public void setData(GoodsTypeInfo goodsTypeInfo, int position) {
+            mType.setText(goodsTypeInfo.getName());
+        }
+    }
 
 }
