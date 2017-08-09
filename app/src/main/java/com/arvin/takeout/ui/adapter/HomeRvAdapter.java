@@ -1,6 +1,8 @@
 package com.arvin.takeout.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 
 import com.arvin.takeout.R;
 import com.arvin.takeout.model.beans.Seller;
+import com.arvin.takeout.ui.activity.BusinessActivity;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
@@ -152,13 +155,25 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
         TextView mTvHomeSendPrice;
         @InjectView(R.id.tv_home_distance)
         TextView mTvHomeDistance;
+        private Seller mSeller;
 
         SellerHolder(View view) {
             super(view);
             ButterKnife.inject(this, view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(mContext,BusinessActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("seller",mSeller);
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
+                }
+            });
         }
 
         public void setData(Seller seller) {
+            this.mSeller = seller;
             mTvTitle.setText(seller.getName());
             mTvCount.setText(seller.getSale());
             mTvTitle.setText(seller.getName());

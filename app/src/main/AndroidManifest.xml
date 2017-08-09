@@ -70,6 +70,10 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".ui.activity.BusinessActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
         <!--短信验证-->
         <activity
             android:name="com.mob.tools.MobUIShell"
