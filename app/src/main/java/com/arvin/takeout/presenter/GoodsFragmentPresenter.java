@@ -47,15 +47,20 @@ public class GoodsFragmentPresenter extends BasePresenter {
         BusinessInfo businessInfo = gson.fromJson(data, BusinessInfo.class);
         Log.e("goods",businessInfo.toString());
         mGoodsTypeInfoList = businessInfo.getList();
-//        for (int i = 0; i <mGoodsTypeInfoList.size() ; i++) {
-//            GoodsTypeInfo goodsTypeInfo=mGoodsTypeInfoList.get(i);
-//            for (int j = 0; j <goodsTypeInfo.getList().size() ; j++) {
-//                GoodsInfo goodsInfo = goodsTypeInfo.getList().get(j);
-//                goodsInfo.setTypeName(goodsTypeInfo.getName());
-//                goodsInfo.setTypeId(goodsTypeInfo.getId());
-//                mGoodsInfoList.add(goodsInfo);
-//            }
-//        }
+        for (int i = 0; i <mGoodsTypeInfoList.size() ; i++) {
+            GoodsTypeInfo goodsTypeInfo=mGoodsTypeInfoList.get(i);
+            for (int j = 0; j <goodsTypeInfo.getList().size() ; j++) {
+                GoodsInfo goodsInfo = goodsTypeInfo.getList().get(j);
+                goodsInfo.setTypeName(goodsTypeInfo.getName());
+                goodsInfo.setTypeId(goodsTypeInfo.getId());
+                mGoodsInfoList.add(goodsInfo);
+            }
+        }
+        //赋值
+        mGoodsFragment.mGoodsTypeInfoList = mGoodsTypeInfoList;
+        mGoodsFragment.mGoodsInfoList = mGoodsInfoList;
+        //设置type数据和每个type对应的商品数据
         mGoodsFragment.mGoodsTypeAdapter.setGoodsTypeInfoList(mGoodsTypeInfoList);
+        mGoodsFragment.mGoodsAdapter.setGoodsInfoList(mGoodsInfoList);
     }
 }

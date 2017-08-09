@@ -10,11 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.arvin.takeout.R;
+import com.arvin.takeout.adapter.GoodsAdapter;
 import com.arvin.takeout.dagger2.component.DaggerGoodsFragmentComponent;
+import com.arvin.takeout.model.beans.GoodsInfo;
+import com.arvin.takeout.model.beans.GoodsTypeInfo;
 import com.arvin.takeout.module.GoodsFragmentModule;
 import com.arvin.takeout.presenter.GoodsFragmentPresenter;
 import com.arvin.takeout.ui.adapter.GoodsTypeAdapter;
 import com.arvin.takeout.ui.views.RecycleViewDivider;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -32,9 +37,11 @@ public class GoodsFragment extends Fragment {
     @InjectView(R.id.slhlv)
     StickyListHeadersListView mSlhlv;
     public GoodsTypeAdapter mGoodsTypeAdapter;
-
+    public GoodsAdapter mGoodsAdapter;
     @Inject
     public GoodsFragmentPresenter mGoodsFragmentPresenter;
+    public List<GoodsTypeInfo> mGoodsTypeInfoList;
+    public List<GoodsInfo> mGoodsInfoList;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,6 +55,10 @@ public class GoodsFragment extends Fragment {
         mRvGoodsType.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         //增加分割线
         mRvGoodsType.addItemDecoration(new RecycleViewDivider(getContext(), LinearLayoutManager.HORIZONTAL));
+
+        //商品Adapter
+        mGoodsAdapter = new GoodsAdapter(this, getContext());
+        mSlhlv.setAdapter(mGoodsAdapter);
         return view;
     }
 
