@@ -28,4 +28,7 @@ public interface RequestApi {
 
     @GET(Constants.LOGIN)//登入
     Call<ResponseInfo> login(@QueryMap Map<String, String> params);
+
+    @GET(Constants.BUSINESS)
+    Call<ResponseInfo> getBusinessInfo(@Query("sellerId") int sellerId);
 }

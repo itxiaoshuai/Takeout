@@ -10,9 +10,10 @@ public class Constants {
     public static final String HOME = HOST + "home";
     public static final String ORDER = HOST + "order";
     public static final String LOGIN = HOST + "login";
-
+    public static final String BUSINESS = HOST + "business";
     //SMSSDK.initSDK(this, "您的appkey", "您的appsecret");
     public static final String APP_KEY = "1fcb54534d42f";
-    public static final java.lang.String APP_SECRET = "55c0e8cc791c41eaac11753508b1d098";
+    public static final String APP_SECRET = "55c0e8cc791c41eaac11753508b1d098";
+
 
 }
